@@ -3,6 +3,10 @@
   "displayName": "r7kamura-com-writer",
   "description": "VSCode extension for r7kamura.com.",
   "publisher": "r7kamura",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r7kamura/vscode-r7kamura-com-writer.git"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.61.0"
