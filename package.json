@@ -2,6 +2,7 @@
 	"name": "r7kamura-com-writer",
 	"displayName": "r7kamura-com-writer",
 	"description": "VSCode extension for r7kamura.com.",
+	"publisher": "r7kamura",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.61.0"
