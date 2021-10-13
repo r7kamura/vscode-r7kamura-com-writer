@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
                 editor.selections = [new vscode.Selection(position, position)];
                 editor.revealRange(new vscode.Range(position, position));
               });
-            })
+            });
           });
         });
       });
