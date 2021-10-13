@@ -1,7 +1,7 @@
 {
 	"name": "r7kamura-com-writer",
 	"displayName": "r7kamura-com-writer",
-	"description": "Helper for writing r7kamura.com articles.",
+	"description": "VSCode extension for r7kamura.com.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.61.0"
