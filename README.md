@@ -1,4 +1,4 @@
-# r7kamura-com-writer
+# vscode-r7kamura-com-writer
 
 VSCode extension for [r7kamura.com](https://r7kamura.com/).
 
