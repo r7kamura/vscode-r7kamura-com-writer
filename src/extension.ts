@@ -1,26 +1,47 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+	let disposable = vscode.commands.registerCommand('r7kamura-com-writer.create', () => {
+    if (!vscode.workspace || !vscode.workspace.workspaceFolders) {
+      return vscode.window.showErrorMessage('Please open a project folder first');
+    }
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "r7kamura-com-writer" is now active!');
+    const workspacePath = vscode.workspace.workspaceFolders[0].uri.toString().split(':')[1];
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('r7kamura-com-writer.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from r7kamura-com-writer!');
+		vscode.window.showInputBox({
+      title: 'name-in-url',
+    }).then((name) => {
+      vscode.window.showInputBox({
+        title: 'Title',
+      }).then((title) => {
+        const date = new Date();
+        const yyyy = date.getFullYear();
+        const mm = `0${date.getMonth() + 1}`.slice(-2);
+        const dd = `0${date.getDate()}`.slice(-2);
+        const filePath = path.join(workspacePath, 'articles', `${yyyy}-${mm}-${dd}-${name}.md`);
+        const content = `---\ntitle: ${title}\n---\n\n`;
+        fs.writeFile(filePath, content, (error) => {
+          if (error) {
+            return vscode.window.showErrorMessage(`Failed to create ${filePath}`);
+          }
+          vscode.window.showInformationMessage(`Created ${filePath}`);
+
+          const vscodeUri = vscode.Uri.file(filePath);
+          vscode.workspace.openTextDocument(vscodeUri).then(vscodeTextDocument => {
+            vscode.window.showTextDocument(vscodeTextDocument).then(editor => {
+              const position = new vscode.Position(5, 1);
+              editor.selections = [new vscode.Selection(position, position)];
+              editor.revealRange(new vscode.Range(position, position));
+            });
+          })
+        });
+      });
+    });
 	});
 
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
