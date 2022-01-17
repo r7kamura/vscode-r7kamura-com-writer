@@ -22,7 +22,7 @@
     "commands": [
       {
         "command": "r7kamura-com-writer.create",
-        "title": "Create new article for r7kamura.com"
+        "title": "Create new diary for r7kamura.com"
       }
     ]
   },
